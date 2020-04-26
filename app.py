@@ -1,12 +1,15 @@
 import flask 
 from flask import request,jsonify
 from pymongo import MongoClient
+import os 
 
 app = flask.Flask(__name__)
 app.config["Debug"] = True
 
+credentials = str(os.environ['MongoCreds'])
 
-cluster = MongoClient("mongodb://seekingEmployment:sierraecho19@cluster0-shard-00-00-duxfw.azure.mongodb.net:27017,cluster0-shard-00-01-duxfw.azure.mongodb.net:27017,cluster0-shard-00-02-duxfw.azure.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority")
+cluster = MongoClient(credentials)
+
 
 
 @app.route('/', methods=['GET'])
